@@ -4,9 +4,9 @@ export default function Home() {
   return (
     <div>
       <Layout 
-        title='This a title of Layout' 
-        subtitle='This a subtitle of Layout'>
-          <h3>Conteúdo</h3>
+        title='Bem vindo à Home' 
+        subtitle='Escolha a sua opção:'>
+          <h3>Home</h3>
       </Layout>
     </div>
   )
