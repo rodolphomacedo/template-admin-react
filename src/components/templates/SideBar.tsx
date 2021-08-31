@@ -2,13 +2,8 @@ import { iconAdjustments, iconCalculate, iconExit, iconGraph, iconHome } from ".
 import ItemSideBar from "./ItemSideBar";
 import Logo from "./Logo";
 
-interface SideBarProps{
-    url: string
-    text: string
-    icon: any
-}
 
-export default function SideBar(props: SideBarProps) {
+export default function SideBar() {
     return (
         <aside className={`
             flex flex-col
