@@ -10,7 +10,11 @@ interface SideBarProps{
 
 export default function SideBar(props: SideBarProps) {
     return (
-        <aside className={`flex flex-col`}>
+        <aside className={`
+            flex flex-col
+            bg-gray-200 text-gray-900
+            dark:bg-gray-900 dark:text-gray-200
+        `}>
             <div className={` 
                 flex flex-col justify-center items-center
                 bg-gradient-to-tr from-indigo-500 via-yellow-200 to-purple-800
@@ -30,9 +34,9 @@ export default function SideBar(props: SideBarProps) {
                     onClick={() => console.log("Logout")} 
                     text="Exit" icon={ iconExit }
                     className={`
-                        text-red-600
-                        hover:bg-red-400 hover:text-white 
-
+                        text-red-600 dark:text-red-400
+                        hover:bg-red-400  dark:hover:bg-red-900
+                        hover:text-white dark:hover:text-gray-300
                     `}
                 />
             </ul>
