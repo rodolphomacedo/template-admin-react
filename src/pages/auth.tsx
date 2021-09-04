@@ -19,9 +19,17 @@ export default function Auth() {
             flex flex-columns h-screen 
             justify-center items-center
         `}>
-            <div className={`w-1/2`}>
+            <div className={` hidden md:block md:w-1/2 lg:w-2/3`}>
+                <img 
+                    src="https://source.unsplash.com/random" 
+                    alt="Image the auth page." 
+                    className={`h-screen w-full object-cover`}
+                />
+            </div>
+
+            <div className={`w-3/4 m-10 md:w-1/2 lg:w-1/3`}>
                 <h1 className={`
-                    text-xl font-bold mb-5 
+                    md:text-xl lg:text-3xl font-bold mb-5 text-gray-400
                 `}>
                     {mode === 'login' ? 'Entre com sua Conta' : 'Cadastre-se na Plataforma'}
                 </h1>
@@ -56,6 +64,29 @@ export default function Auth() {
                 `}>
                     Entrar com Google
                 </button>
+                { mode === 'login' ? (
+                    <p className={`text-gray-500 mt-12`}>
+                        Novo por aqui? 
+                        <a onClick={() => setMode('signUp') }
+                            className={`
+                                text-blue-300 hover:text-blue-400
+                                font-semibold  cursor-pointer     
+
+                            `}
+                        >  Cadastre-se gratuitamente.</a>
+                    </p>
+                ) : (
+                    <p className={` text-gray-500 mt-12`}>
+                    Já faz parte? 
+                    <a onClick={() => setMode('login') }
+                        className={`
+                            text-blue-300 hover:text-blue-400
+                            font-semibold  cursor-pointer     
+
+                        `}
+                    > Entre por aqui.</a>
+                </p>
+                )}
             </div>
         </div>
     )
