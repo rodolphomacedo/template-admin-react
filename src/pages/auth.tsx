@@ -1,12 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
-import userAuth from '../data/hook/UserAuth'
+import useAuth from '../data/hook/UserAuth'
 import { useState } from "react";
 import AuthInput from "../components/auth/AuthInput";
 import { iconWarning } from "../components/Icons";
 
 export default function Auth() {
 
-    const { user, loginGoogle } = userAuth() 
+    const { user, loginGoogle } = useAuth() 
 
     const [error, setError] = useState(null)
     const [mode, setMode] = useState<'login' | 'signUp'>('login')

@@ -4,11 +4,11 @@ import firebase from '../../firebase/config'
 import UserModel from '../../model/UserModel'
 
 interface AuthContextProps {
-    user?: UserModel,
+    user?: UserModel
     loginGoogle?: () => Promise<void>
 }
 
-const authContext = createContext<AuthContextProps>({})
+const AuthContext = createContext<AuthContextProps>({})
 
 async function userNormalize(userFirebase: firebase.User): Promisse<UserModel> {
     const token = await userFirebase.getIdToken()
@@ -18,7 +18,7 @@ async function userNormalize(userFirebase: firebase.User): Promisse<UserModel> {
         email: userFirebase.email,
         token, 
         provider: userFirebase.providerData[0].providerId,
-        imageURL: userFirebase.im
+        imageURL: userFirebase.photoURL
     }
 }
 
@@ -27,18 +27,25 @@ export function AuthProvider(props) {
     const [user, setUser] = useState<UserModel>(null)
     
     async function loginGoogle() {
-        console.log('Login Google...')
-        route.push('/')
+        const resp = await firebase.auth().signInWithPopup(
+            new firebase.auth.GoogleAuthProvider()
+        ) 
+        
+        if (resp.user?.email) {
+            const user = await userNormalize(resp.user)
+            setUser(user)
+            route.push('/')
+        }
     }
 
     return (
-        <authContext.Provider value={{
+        <AuthContext.Provider value={{
             user,
             loginGoogle
         }}>
             { props.children }
-        </authContext.Provider>
+        </AuthContext.Provider>
     )
 }
 
-export default authContext
+export default AuthContext

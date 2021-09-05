@@ -10,8 +10,6 @@ function MyApp({ Component, pageProps }) {
         <Component {...pageProps} />
       </AppProvider>
     </AuthProvider>
-
-
   )
 }
 
