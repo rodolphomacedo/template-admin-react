@@ -1,8 +1,13 @@
+/* eslint-disable @next/next/no-img-element */
+import userAuth from '../data/hook/UserAuth'
 import { useState } from "react";
 import AuthInput from "../components/auth/AuthInput";
 import { iconWarning } from "../components/Icons";
 
 export default function Auth() {
+
+    const { user, loginGoogle } = userAuth() 
+
     const [error, setError] = useState(null)
     const [mode, setMode] = useState<'login' | 'signUp'>('login')
     const [email, setEmail] = useState('')
@@ -81,7 +86,7 @@ export default function Auth() {
 
                 <hr className=" my-6 border-gray-100 w-full"/>
                 
-                <button onClick={submit} className={`
+                <button onClick={loginGoogle} className={`
                     w-full bg-red-500 hover:bg-red-600
                     text-white rounded-lg px-4 py-3
                 `}>
