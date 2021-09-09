@@ -1,6 +1,6 @@
 import  route  from 'next/router'
 import { createContext, useState } from 'react'
-import firebase from '../../firebase/config'
+import firebase from '../../firebaseConfig/config'
 import UserModel from '../../model/UserModel'
 
 interface AuthContextProps {
@@ -10,7 +10,7 @@ interface AuthContextProps {
 
 const AuthContext = createContext<AuthContextProps>({})
 
-async function userNormalize(userFirebase: firebase.User): Promisse<UserModel> {
+async function userNormalize(userFirebase: firebase.User): Promise<UserModel> {
     const token = await userFirebase.getIdToken()
     return {
         uid: userFirebase.uid,
