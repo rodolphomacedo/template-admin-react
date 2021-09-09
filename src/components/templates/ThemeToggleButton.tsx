@@ -8,7 +8,8 @@ interface ThemeToggleButtonProps {
 export default function ThemeToggleButton(props: ThemeToggleButtonProps) {
     return props.theme === 'dark' ? (
         <div onClick={ props.toggleTheme } className={`
-            hidden sm:flex items-center justify-start cursor-pointer p-1 rounded-full
+            hidden 
+            sm:flex items-center justify-start cursor-pointer p-1 rounded-full
             bg-gradient-to-r from-yellow-300 to-yellow-600
             w-14 lg:w-24 h-8
 
@@ -24,7 +25,8 @@ export default function ThemeToggleButton(props: ThemeToggleButtonProps) {
         </div>
     ) : (
         <div onClick={ props.toggleTheme } className={`
-            hidden sm:flex items-center justify-end cursor-pointer p-1 rounded-full
+            hidden 
+            sm:flex items-center justify-end cursor-pointer p-1 rounded-full
             bg-gradient-to-r from-gray-500 to-gray-800 
             w-14 lg:w-24 h-8
         `}>

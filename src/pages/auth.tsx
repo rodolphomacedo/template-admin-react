@@ -30,12 +30,12 @@ export default function Auth() {
     }
 
     return (
-        <div className={` 
+        <div className={`
             flex flex-columns h-screen 
             justify-center items-center
         `}>
             <div className={` hidden md:block md:w-1/2 lg:w-2/3`}>
-                <img 
+                <img
                     src="https://source.unsplash.com/random" 
                     alt="Image the auth page."
                     className={`h-screen w-full object-cover`}

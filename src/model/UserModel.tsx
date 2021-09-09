@@ -4,5 +4,5 @@ export default interface UserModel {
     email: string
     token: string
     provider: string
-    iamgeURL: string
+    photoUrl: string
 }
