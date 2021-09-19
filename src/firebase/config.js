@@ -5,9 +5,9 @@ import 'firebase/auth'
 if (!firebase.apps.length) {
     firebase.initializeApp({
         apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
-        authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN ,
-        projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT
+        authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+        projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT,
     })
 }
 
-export default firebase
+export default firebase 

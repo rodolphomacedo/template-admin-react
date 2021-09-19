@@ -86,7 +86,7 @@ export default function Auth() {
 
                 <hr className=" my-6 border-gray-100 w-full"/>
                 
-                <button onClick={loginGoogle} className={`
+                <button onClick={ loginGoogle } className={`
                     w-full bg-red-500 hover:bg-red-600
                     text-white rounded-lg px-4 py-3
                 `}>

@@ -5,16 +5,16 @@ import firebase from '../../firebase/config'
 import UserModel from '../../model/UserModel'
 
 interface AuthContextProps {
-    user?: UserModel,
+    user?: UserModel
+    loading?: boolean
     loginGoogle?: () => Promise<void>
+    logout?: () => Promise<void>
 }
 
 const authContext = createContext<AuthContextProps>({})
 
 async function userNormalized(userFirebase: firebase.User): Promise<UserModel> {
-    
-    const token = await userFirebase.getIdToken()   
-
+    const token =  await userFirebase.getIdToken()
     return {
         uid: userFirebase.uid,
         name: userFirebase.displayName,
@@ -40,13 +40,15 @@ export function AuthProvider(props) {
     const [loading, setLoading] = useState(true)
     const [user, setUser] = useState<UserModel>(null)
 
-    async function setupSession(userFirebase) {
-        const user = await userNormalized(userFirebase)
+    async function setupSession(userFirebase: firebase.User) {
+        
         if (userFirebase?.email) {
+            const user = await userNormalized(userFirebase)
             setUser(user)
             manageCookie(true)
             setLoading(false)
             return user.email
+
         } else {
             setUser(null)
             manageCookie(false)
@@ -56,23 +58,43 @@ export function AuthProvider(props) {
     }
 
     async function loginGoogle() {
-        const resp = await firebase.auth().signInWithPopup(
-            new firebase.auth.GoogleAuthProvider()
-        )
+        try {
+            setLoading(true)
+            const resp = await firebase.auth().signInWithPopup(
+                new firebase.auth.GoogleAuthProvider() 
+            )
+            setupSession(resp.user)
+            route.push('/')
+        } finally {
+            setLoading(false)
+        }
+    }
 
-        setupSession(resp.user)
-        route.push('/')
+    async function logout() {
+        try {
+            setLoading(true)
+            await firebase.auth().signOut()
+            await setupSession(null)
+        } finally {
+            setLoading(false)
+        }
     }
 
     useEffect(() => {
-        const cancel = firebase.auth().onIdTokenChanged(setupSession)
-        return () => cancel()
+        if(Cookies.get('admin-template-cod3r-auth')){
+            const cancel = firebase.auth().onIdTokenChanged(setupSession)
+            return () => cancel()
+        } else {
+            setLoading(false)
+        }
     },  [])
 
     return (
         <authContext.Provider value={{
             user,
-            loginGoogle
+            loading,
+            loginGoogle,
+            logout
         }}>
             { props.children }
         </authContext.Provider>

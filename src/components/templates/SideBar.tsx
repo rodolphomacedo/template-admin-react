@@ -1,9 +1,13 @@
+import useAuth from "../../data/hook/UserAuth";
 import { iconAdjustments, iconCalculate, iconExit, iconGraph, iconHome } from "../Icons";
 import ItemSideBar from "./ItemSideBar";
 import Logo from "./Logo";
 
 
 export default function SideBar() {
+
+    const { logout } = useAuth()
+
     return (
         <aside className={`
             flex flex-col
@@ -26,8 +30,8 @@ export default function SideBar() {
 
             <ul>
                 <ItemSideBar 
-                    onClick={() => console.log("Logout")} 
                     text="Exit" icon={ iconExit }
+                    onClick={ logout } 
                     className={`
                         text-red-600 dark:text-red-400
                         hover:bg-red-400  dark:hover:bg-red-900
