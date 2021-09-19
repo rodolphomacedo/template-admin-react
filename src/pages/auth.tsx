@@ -1,12 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
-import userAuth from '../data/hook/UserAuth'
 import { useState } from "react";
-import AuthInput from "../components/auth/AuthInput";
+import userAuth from '../data/hook/UserAuth'
 import { iconWarning } from "../components/Icons";
+import AuthInput from "../components/auth/AuthInput";
 
 export default function Auth() {
 
-    const { user, loginGoogle } = userAuth() 
+    const { signup, login, loginGoogle, logout } = userAuth() 
 
     const [error, setError] = useState(null)
     const [mode, setMode] = useState<'login' | 'signUp'>('login')
@@ -19,13 +19,15 @@ export default function Auth() {
         setTimeout(() => setError(null), timeOut * 1000)
     }
 
-    function submit(){
-        if (mode === 'login') {
-            console.log('login')
-            showError('Erro no Login...', 3)
-        } else {
-            console.log('cadastrar')
-            showError('Erro no Cadastro...', 4)
+    async function submit(){
+        try{
+            if (mode === 'login') {
+                await login(email, password)
+            } else {
+                await signup(email, password)
+            }
+        } catch(e) {
+            await showError(e?.message ?? 'Ocorreu um erro desconhecido.')
         }
     }
 
